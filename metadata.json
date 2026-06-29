@@ -1,0 +1,6 @@
+{
+  "name": "BPM Tech Solutions",
+  "description": "Official website for BPM Tech Solutions, an online technology and services agency managing security, upskilling, and digital publishing.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
