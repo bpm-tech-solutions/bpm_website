@@ -1,2 +1,0 @@
-# Redirect all paths to index.html to support SPA routing on Cloudflare Pages
-/*    /index.html   200
