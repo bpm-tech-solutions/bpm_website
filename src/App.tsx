@@ -1,11 +1,9 @@
 import { ThemeProvider, useTheme } from './context/ThemeContext';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
-import CommandLineHero from './components/CommandLineHero';
-import BrandPortfolio from './components/BrandPortfolio';
-import TechStack from './components/TechStack';
-import FundingSection from './components/FundingSection';
-import ContactForm from './components/ContactForm';
 import Footer from './components/Footer';
+import Home from './pages/Home';
+import Services from './pages/Services';
 
 function AppContent() {
   const { isWireframe } = useTheme();
@@ -18,20 +16,19 @@ function AppContent() {
           : 'bg-[#0A0A0C] text-gray-100'
       }`}
     >
-      {/* Global Navigation */}
-      <Header />
+      <BrowserRouter>
+        {/* Global Navigation */}
+        <Header />
 
-      {/* Main Corporate Sections */}
-      <main id="app-main-content">
-        <CommandLineHero />
-        <BrandPortfolio />
-        <TechStack />
-        <FundingSection />
-        <ContactForm />
-      </main>
+        {/* Main Routes */}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/services" element={<Services />} />
+        </Routes>
 
-      {/* Corporate Footer */}
-      <Footer />
+        {/* Corporate Footer */}
+        <Footer />
+      </BrowserRouter>
     </div>
   );
 }

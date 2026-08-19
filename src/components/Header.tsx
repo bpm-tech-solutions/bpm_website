@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ShieldCheck, Menu, X, ArrowDownRight, Globe, Sun, Moon } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
 import BpmLogo from './BpmLogo';
 
@@ -22,11 +23,12 @@ export default function Header() {
   }, []);
 
   const navLinks = [
-    { name: 'Core Engine', href: '#home' },
-    { name: 'Brand Assets', href: '#brands' },
-    { name: 'Proprietary Tech', href: '#tech' },
-    { name: 'Support', href: '#collaboration' },
-    { name: 'Contact Portal', href: '#contact' },
+    { name: 'Core Engine', href: '/#home' },
+    { name: 'Brand Assets', href: '/#brands' },
+    { name: 'Services', href: '/services' },
+    { name: 'Proprietary Tech', href: '/#tech' },
+    { name: 'Support', href: '/#collaboration' },
+    { name: 'Contact Portal', href: '/#contact' },
   ];
 
   return (
@@ -44,7 +46,7 @@ export default function Header() {
         <div className="container mx-auto px-6 flex items-center justify-between">
           
           {/* LOGO */}
-          <a href="#home" className="flex items-center gap-3 group">
+          <a href="/#home" className="flex items-center gap-3 group">
             <BpmLogo 
               isWireframe={isWireframe} 
               className={`w-12 h-12 md:w-14 md:h-14 shrink-0 transition-all duration-300 ease-out transform group-hover:scale-110 ${
@@ -62,19 +64,36 @@ export default function Header() {
 
           {/* DESKTOP NAVIGATION */}
           <nav className="hidden md:flex items-center gap-6">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className={`text-xs font-mono transition-colors duration-200 ${
-                  isWireframe
-                    ? 'text-black font-bold hover:underline'
-                    : 'text-gray-400 hover:text-blue-400'
-                }`}
-              >
-                {link.name.toUpperCase()}
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              if (link.href.startsWith('/#') || link.href.startsWith('#')) {
+                return (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    className={`text-xs font-mono transition-colors duration-200 ${
+                      isWireframe
+                        ? 'text-black font-bold hover:underline'
+                        : 'text-gray-400 hover:text-blue-400'
+                    }`}
+                  >
+                    {link.name.toUpperCase()}
+                  </a>
+                );
+              }
+              return (
+                <Link
+                  key={link.name}
+                  to={link.href}
+                  className={`text-xs font-mono transition-colors duration-200 ${
+                    isWireframe
+                      ? 'text-black font-bold hover:underline'
+                      : 'text-gray-400 hover:text-blue-400'
+                  }`}
+                >
+                  {link.name.toUpperCase()}
+                </Link>
+              );
+            })}
           </nav>
 
           {/* RIGHT BADGE / CTA */}
@@ -107,7 +126,7 @@ export default function Header() {
             </div>
 
             <a
-              href="#contact"
+              href="/#contact"
               className={`inline-flex items-center text-xs font-mono px-4 py-2 rounded-lg transition-all duration-200 ${
                 isWireframe
                   ? 'border-2 border-black bg-white text-black hover:bg-black hover:text-white font-bold'
@@ -161,20 +180,38 @@ export default function Header() {
             }`}
           >
             <div className="flex flex-col gap-4 text-left">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`text-sm font-mono py-2 border-b block ${
-                    isWireframe
-                      ? 'text-black border-neutral-200 font-bold'
-                      : 'text-gray-300 hover:text-blue-400 border-[#14141A]'
-                  }`}
-                >
-                  {link.name.toUpperCase()}
-                </a>
-              ))}
+              {navLinks.map((link) => {
+                if (link.href.startsWith('/#') || link.href.startsWith('#')) {
+                  return (
+                    <a
+                      key={link.name}
+                      href={link.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={`text-sm font-mono py-2 border-b block ${
+                        isWireframe
+                          ? 'text-black border-neutral-200 font-bold'
+                          : 'text-gray-300 hover:text-blue-400 border-[#14141A]'
+                      }`}
+                    >
+                      {link.name.toUpperCase()}
+                    </a>
+                  );
+                }
+                return (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`text-sm font-mono py-2 border-b block ${
+                      isWireframe
+                        ? 'text-black border-neutral-200 font-bold'
+                        : 'text-gray-300 hover:text-blue-400 border-[#14141A]'
+                    }`}
+                  >
+                    {link.name.toUpperCase()}
+                  </Link>
+                );
+              })}
             </div>
 
             {/* Mobile metadata badge */}
@@ -196,7 +233,7 @@ export default function Header() {
             </div>
 
             <a
-              href="#contact"
+              href="/#contact"
               onClick={() => setMobileMenuOpen(false)}
               className={`w-full text-center py-3 font-medium rounded-lg text-sm ${
                 isWireframe
